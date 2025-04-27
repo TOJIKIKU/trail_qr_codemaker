@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>QRコードジェネレーター</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 18px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+        #qrcode {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>QRコードジェネレーター</h1>
+    <input type="text" id="text" placeholder="コマンドを入力してください">
+    <br>
+    <button onclick="generateQRCode()">生成する</button>
+
+    <div id="qrcode"></div>
+
+    <script>
+        function generateQRCode() {
+            const qrDiv = document.getElementById('qrcode');
+            qrDiv.innerHTML = ""; // 以前のQRコードをクリア
+            const text = document.getElementById('text').value;
+            if (text.trim() === "") {
+                alert("テキストを入力してください！");
+                return;
+            }
+            new QRCode(qrDiv, {
+                text: text,
+                width: 256,
+                height: 256,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
+        }
+    </script>
+</body>
+</html>
